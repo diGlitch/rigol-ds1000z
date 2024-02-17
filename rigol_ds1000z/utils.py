@@ -11,6 +11,9 @@ from pyvisa.errors import LibraryError, VisaIOError
 
 def find_visas():
     # Return all VISA addresses (and the backend) which map to a Rigol DS1000Z.
+    print('hack in utils.py')
+    return [('USB0::6833::1230::DS1ZA243102874::0::INSTR', "@py")]
+    # return [("TCPIP::192.168.0.110::INSTR", "@py")]
 
     RIGOL_IDN_REGEX = "^RIGOL TECHNOLOGIES,DS1[01][057]4Z(-S)?( Plus)?,.+$"
 

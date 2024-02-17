@@ -26,6 +26,7 @@ class Rigol_DS1000Z:
 
     def __init__(self, visa: Optional[str] = None):
         visas = find_visas()
+        print(f'visas in oscope.py {visa}')
 
         if visa is None:
             self.visa_name, self.visa_backend = visas[0]
@@ -50,9 +51,14 @@ class Rigol_DS1000Z:
 
     def open(self):
         """Open the VISA resource to establish the communication channel."""
-        self.visa_rsrc = ResourceManager(self.visa_backend).open_resource(
-            self.visa_name
-        )
+        #self.visa_rsrc = ResourceManager(self.visa_backend).open_resource(
+        #    self.visa_name
+        #)
+        print('useing hardcoded address in /scr/oscope.py open()')
+        self.visa_rsrc = ResourceManager(self.visa_backend).open_resource(f'USB0::6833::1230::DS1ZA243102874::0::INSTR', write_termination = '\n', read_termination = '\n')
+        # print('useing hardcoded ip in /scr/oscope.py open()')
+        # self.visa_rsrc = ResourceManager(self.visa_backend).open_resource(f"TCPIP0::192.168.0.110::5555::SOCKET", write_termination = '\n', read_termination = '\n')
+
         return self
 
     def close(self):
